@@ -1,8 +1,8 @@
-#Typing Test Club v1.2
+#Typing Test Club v1.3
 #Made as School Project
 #Developer of this CodeBase & BiVi: Anmol Utkarsh [Ofcourse]
 #Used Advanced Proprietary Scoring Engine [BiVi Typing Test API Ecosystem infused]
-#Also Code Present in GITHUB [OSCB] //Open Source Code Base under MIT License: https://github.com/AnmolUtkarsh/Typing-Test-School-Project-OSCB.git
+#Code also Present in GITHUB under MIT License: https://github.com/AnmolUtkarsh/Typing-Test-School-Project-OSCB.git
 #Developed without AI except the OS Path Documentation
 #Keep in mind that this Specific Code Base uses BiVi Typing Test "v1" POST API and GET API. So adjust your code according to the latest BiVi API Versions.
 
