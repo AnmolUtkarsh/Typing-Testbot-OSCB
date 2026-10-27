@@ -1,3 +1,6 @@
+# Typing Testbot v1.4
+
+
 # Typing-Test-School-Project-OSCB
 Public : Typing Test Club School Project [Open Source CodeBase]
 
@@ -27,5 +30,4 @@ A Python-based typing test application developed as a Class 12 school project.
 
 ## License
 
-Licensed under:
 MIT License
