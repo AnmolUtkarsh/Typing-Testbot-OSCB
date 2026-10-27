@@ -1,4 +1,4 @@
-# Typing Testbot v1.4
+# Typing Testbot v1.5
 # Made as School Project
 # Developer of this CodeBase & BiVi: Anmol Utkarsh
 # Used Advanced Proprietary Scoring Engine [BiVi Typing Test APIs]
@@ -9,6 +9,7 @@
 import requests
 import time
 import pandas as pd
+import matplotlib.pyplot as plt
 import os
 
 #Created by AI:
@@ -28,7 +29,7 @@ else:
 print("Hi there, welcome to Typing Test Club!")
 
 while True:
-    print("Please, tell us whether you want to create a new test or find the Tests using testId?:\n1: Create New Test\n2: Find Test (Server)\n3: Find Test (Locally)\n4: Exit")
+    print("Please, tell us whether you want to create a new test or find the Tests using testId?:\n1: Create New Test\n2: Find Test (Server)\n3: Find Test (Locally)\n4: View Local Result Statistics\n5: Exit")
 
     choice = input("Enter your choice:")
 
@@ -196,6 +197,8 @@ while True:
             print("Error retrieving test from server:", er)
 
 
+
+
     elif choice == "3":
         testId = input("Enter Test ID: ")
         df1 = pd.read_csv(csvFile)
@@ -207,12 +210,45 @@ while True:
             print(result);
 
 
-    elif choice == "4" or choice.lower() == "exit": 
+
+
+    elif choice == "4":
+        if not os.path.exists(csvFile) or os.path.getsize(csvFile) == 0:
+            print("No local test results found.")
+            continue
+
+        stats = pd.read_csv(csvFile).dropna(subset=["WPM", "RawWPM", "Accuracy"])
+        
+        if stats.empty:
+            print("No completed test statistics available.")
+            continue
+
+        print("\nTotal Tests:", len(stats))
+        print("Average WPM:", round(stats["WPM"].mean(), 2))
+        print("Average Raw WPM:", round(stats["RawWPM"].mean(), 2))
+        print("Average Accuracy:", round(stats["Accuracy"].mean(), 2), "%")
+
+        plt.figure(figsize=(8, 4))
+        plt.plot(stats.index + 1, stats["WPM"], marker="o", label="WPM")
+        plt.plot(stats.index + 1, stats["RawWPM"], marker="o", label="Raw WPM")
+        plt.title("Typing Performance Progress")
+        plt.xlabel("Test Number")
+        plt.ylabel("Words Per Minute")
+        plt.legend()
+        plt.grid(True)
+        plt.tight_layout()
+        plt.show()
+
+
+
+
+    elif choice == "5" or choice.lower() == "exit": 
         print("\nThank you for using Typing Test Club!") 
         break
 
 
     else:
         print("Invalid choice.")
+
 
 #Powered by BiVi Proprietary Advance Accuracy Scoring Engine [99.724% Accuracy among other Algorithms]
