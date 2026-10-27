@@ -1,10 +1,9 @@
-#Typing Test Club v1.3
-#Made as School Project
-#Developer of this CodeBase & BiVi: Anmol Utkarsh [Ofcourse]
-#Used Advanced Proprietary Scoring Engine [BiVi Typing Test API Ecosystem infused]
-#Code also Present in GITHUB under MIT License: https://github.com/AnmolUtkarsh/Typing-Test-School-Project-OSCB.git
-#Developed without AI except the OS Path Documentation
-#Keep in mind that this Specific Code Base uses BiVi Typing Test "v1" POST API and GET API. So adjust your code according to the latest BiVi API Versions.
+# Typing Testbot v1.4
+# Made as School Project
+# Developer of this CodeBase & BiVi: Anmol Utkarsh
+# Used Advanced Proprietary Scoring Engine [BiVi Typing Test APIs]
+# Code also Present in GITHUB under MIT License: https://github.com/AnmolUtkarsh/Typing-Test-School-Project-OSCB.git
+# Note: this Specific Code Base uses BiVi Typing Test "v1" POST API and GET API. So adjust your code according to the latest BiVi API Versions.
 
 #CodeBase:
 import requests
@@ -33,10 +32,7 @@ while True:
 
     choice = input("Enter your choice:")
 
-    
-
     if choice == "1":
-
 
         language = input("Enter language(press Enter for default[English200]) : ")
 
@@ -68,7 +64,6 @@ while True:
         test = " ".join(response[1]["test"]["words"])
         testLang = response[1]["test"]["language"]
         testcount = response[1]["test"]["count"]
-
 
         print("\nTest created!")
         print("Test Id:", testId)
@@ -105,16 +100,30 @@ while True:
                 continue
 
             
-            df = pd.read_csv(
-                    csvFile, dtype={
-                        "testId": "string",
-                        "testText": "string",
-                        "testLanguage": "string",
-                        "testCount": "Int64",
-                        "typedText": "string",
-                        "durationSeconds": "float64"
-                    }
-                )
+            if os.path.exists(csvFile):
+                df = pd.read_csv(csvFile, dtype={
+                    "testId": "string",
+                    "testText": "string",
+                    "testLanguage": "string",
+                    "testCount": "Int64",
+                    "typedText": "string",
+                    "durationSeconds": "float64",
+                    "WPM": "float64",
+                    "RawWPM": "float64",
+                    "Accuracy": "float64"
+                })
+            else:
+                df = pd.DataFrame(columns=[
+                    "testId",
+                    "testLanguage",
+                    "testCount",
+                    "testText",
+                    "typedText",
+                    "durationSeconds",
+                    "WPM",
+                    "RawWPM",
+                    "Accuracy"
+                ])
 
             df.loc[df["testId"] == testId, "typedText"] = typedText
             df.loc[df["testId"] == testId, "durationSeconds"] = round(durationSeconds, 2)
@@ -130,17 +139,15 @@ while True:
 
 
 
-"""
-Keep in mind that in the below given POST API request to BiVi Typing Test API. BiVi API also support things like : 
-testText, typedText, durationSeconds, showDecimals, showErrors, showCharactersInfo, showWordsInfo, showAlignment, showTiming, showIntegrity
+# Keep in mind that in the below given POST API request to BiVi Typing Test API. BiVi API also support things like : 
+# testText, typedText, durationSeconds, showDecimals, showErrors, showCharactersInfo, showWordsInfo, showAlignment, showTiming, showIntegrity
 
-For example, I want to get the values like Raw WPM or Accuracy and others in "DECIMAL" then add:
+# For example, I want to get the values like Raw WPM or Accuracy and others in "DECIMAL" then add:
 
-showDecimals:true
+# showDecimals:true
 
-in the BELOW response POST Request. 
-Try write this in below of the "durationSeconds". For more details please see https://bivi.online/api/docs. //Upcoming!
-"""
+# in the BELOW response POST Request. 
+# #Try write this in below of the "durationSeconds". For more details please see https://bivi.online/api/docs. //Upcoming!
 
 
         try:
