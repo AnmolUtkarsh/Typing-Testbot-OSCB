@@ -1,9 +1,9 @@
 # Typing Testbot v1.5
 # Made as School Project
-# Developer of this CodeBase & BiVi: Anmol Utkarsh
 # Used Advanced Proprietary Scoring Engine [BiVi Typing Test APIs]
 # Code also Present in GITHUB under MIT License: https://github.com/AnmolUtkarsh/Typing-Testbot-OSCB.git
 # Note: This Specific Code Base uses BiVi Typing Test "v1" POST API and GET API. So adjust your code according to the latest BiVi API Versions.
+# Developer of this CodeBase & BiVi: Anmol Utkarsh
 
 #CodeBase:
 import requests
